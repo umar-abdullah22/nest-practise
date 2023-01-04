@@ -1,0 +1,8 @@
+GET  http://localhost:3003/auth/signup
+    
+    
+{
+    "name":"umar"
+}
+###
+POST  http://localhost:3003/auth/login
