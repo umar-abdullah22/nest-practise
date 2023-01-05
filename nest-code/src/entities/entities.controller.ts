@@ -16,8 +16,8 @@ export class TasksConrtoller {
     return this.taskservice.insertDummyData();
   }
   @Post('add')
-  async insert(@Req() dto: Request) {
-    console.log(dto.body);
+  async insert(@Body() dto: TaskDto) {
+    console.log({ dto });
     return this.taskservice.insert(dto);
   }
 }

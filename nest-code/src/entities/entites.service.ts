@@ -36,8 +36,8 @@ export class TasksService {
     ];
     await this.tasksRepository.insert(tasks);
   }
-  async insert(dto: Request): Promise<{ data: string }> {
-    const { id, title, description } = dto.body;
+  async insert(dto: TaskDto): Promise<{ data: string }> {
+    const { id, title, description } = dto;
     const user = await this.tasksRepository.save({
       id,
       title,
