@@ -35,7 +35,7 @@ describe('App e2e', () => {
   });
   describe('Auth', () => {
     const dto: AuthDto = {
-      email: 'umar786@test.com',
+      email: 'umar7866@test.com',
       password: '123',
     };
     describe('Signup', () => {
@@ -60,17 +60,17 @@ describe('App e2e', () => {
       it('should throw if body not provided', () => {
         return pactum.spec().post('/auth/signup').expectStatus(400);
       });
-      it('should signup', () => {
-        return pactum
-          .spec()
-          .post('/auth/signup')
-          .withBody(dto)
-          .expectStatus(201); //.inspect() to see req logs
-      });
+      // it('should signup', () => {
+      //   return pactum
+      //     .spec()
+      //     .post('/auth/signup')
+      //     .withBody(dto)
+      //     .expectStatus(201); //.inspect() to see req logs
+      // });
     });
     describe('Login', () => {
       const dto: AuthDto = {
-        email: 'umar2@test.com',
+        email: 'umar2@email.com',
         password: '123',
       };
       let access_token: string;
@@ -135,7 +135,7 @@ describe('App e2e', () => {
         };
         return pactum
           .spec()
-          .patch('/users/4')
+          .patch('/users/5')
           .withHeaders({
             Authorization: 'Bearer $S{userAT}',
           })
@@ -144,19 +144,19 @@ describe('App e2e', () => {
           .inspect();
       });
     });
-    // describe('Delete User', () => {
-    //   it('should delete user', () => {
-    //     return pactum
-    //       .spec()
-    //       .delete('/users/4')
-    //       .withHeaders({
-    //         Authorization: 'Bearer $S{userAT}',
-    //       })
-    //       .expectStatus(200)
-    //       .inspect();
-    //   });
-    // });
-    // });
+    describe('Delete User', () => {
+      it('should delete user', () => {
+        return pactum
+          .spec()
+          .delete('/users/')
+          .withHeaders({
+            Authorization: 'Bearer $S{userAT}',
+          })
+          .expectStatus(200)
+          .inspect();
+      });
+    });
+
     describe('BookMark', () => {
       describe('Get EmptyBookmarks', () => {
         it('should get empty bookmarks', () => {

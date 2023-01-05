@@ -20,16 +20,24 @@ export class UserService {
   async deleteUser(userId: number) {
     const user = await this.prisma.user.findUnique({
       where: {
-        id: userId,
+        id: userId, // specify the id of the user you want to delete
+      },
+      include: {
+        bookmarks: true, // include the user's bookmarks in the query
       },
     });
-    if (!user) {
-      throw new ForbiddenException('user not found');
-    }
 
-    return await this.prisma.user.delete({
+    // Delete all bookmarks associated with the user
+    await this.prisma.bookMark.deleteMany({
       where: {
-        id: userId,
+        userId: user.id,
+      },
+    });
+
+    // Delete the user
+    await this.prisma.user.delete({
+      where: {
+        id: user.id,
       },
     });
   }
